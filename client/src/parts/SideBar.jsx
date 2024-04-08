@@ -26,7 +26,7 @@ function SideBar() {
         <ul className="mt-4">
           <li className="mb-1">
             <NavLink
-              to="/himatikadmin/dashboard"
+              to="/himatikadmin/home"
               className={getNavLinkClass}
             >
               <i className="ri-home-2-line mr-3 text-lg"></i>
