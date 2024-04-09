@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from './views/HomePage'
 import LoginPage from './views/LoginPage';
 import RegisterPage from './views/RegisterPage';
+import PageTemplates from './views/templates/PageTemplates';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -13,8 +14,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/himatikadmin/*" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/himatikadmin/login" element={<LoginPage />} />
+          <Route path="/himatikadmin/register" element={<RegisterPage />} />
         </Routes>
       </Router>
     </>

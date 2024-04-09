@@ -13,7 +13,7 @@ const Login = () => {
       </div>
       <div className="md:w-1/3 max-w-sm">
         <div className="text-center my-5">
-          <h2 className="text-[1.5rem]">Silakan Masuk dengan akun anda</h2>
+          <h2 className="text-[1.5rem]">Silakan masuk dengan akun anda</h2>
         </div>
         <input
           className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded"
@@ -37,9 +37,9 @@ const Login = () => {
             Lupa Kata Sandi?
           </a>
         </div>
-        <div className="text-center md:text-left">
+        <div className="text-center md:text-left my-5">
           <NavLink
-          to="/himatikadmin/*"
+          to="/himatikadmin/home"
             className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider"
           >
             Masuk
