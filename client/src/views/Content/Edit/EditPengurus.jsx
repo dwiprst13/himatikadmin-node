@@ -35,8 +35,8 @@ function EditPengurus() {
 
   return (
     <div className="vh-100 vw-100 text-gray-900 bg-gray-200 min-h-screen">
-      <div class="p-4 flex">
-        <h3 class="text-xl">Edit Pengurus</h3>
+      <div className="p-4 flex">
+        <h3 className="text-xl">Edit Pengurus</h3>
       </div>
       <div className="px-3 py-4 flex justify-between">
         <div className="">

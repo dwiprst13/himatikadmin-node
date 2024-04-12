@@ -1,12 +1,26 @@
 
 GET http://localhost:8081/pengurus
-
 ###
 
 GET http://localhost:8081/pengurus/editpengurus/4
-
 ###
 
 DELETE  http://localhost:8081/pengurus/deletepengurus/9
+###
+
+POST   http://localhost:8081/pengurus/tambahpengurus
+Content-Type: application/json
+
+{
+    "nama": "Dwi Prasetia",
+    "nama_panggilan": "Dwi Prasetia",
+    "nim": "223200230",
+    "divisi": "Diklat",
+    "posisi": "Staff",
+    "foto": "",
+    "ig_link": "asdf",
+    "linkedin_link": "asfdas",
+    "github_link": "af"
+}
 
 ###
