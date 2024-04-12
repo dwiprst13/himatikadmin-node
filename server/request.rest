@@ -6,3 +6,7 @@ GET http://localhost:8081/pengurus
 GET http://localhost:8081/pengurus/editpengurus/4
 
 ###
+
+DELETE  http://localhost:8081/pengurus/deletepengurus/9
+
+###

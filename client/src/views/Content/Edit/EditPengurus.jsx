@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function EditPengurus() {
   const [pengurus, setPengurus] = useState(null);
@@ -33,19 +34,20 @@ function EditPengurus() {
   }, [id]);
 
   return (
-    <div>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : error ? (
-        <p>{error}</p>
-      ) : (
-        pengurus && (
-          <>
-            <h2>Edit Pengurus: {pengurus.nama}</h2>
-            <p>ID: {pengurus.id_pengurus}</p>
-          </>
-        )
-      )}
+    <div className="vh-100 vw-100 text-gray-900 bg-gray-200 min-h-screen">
+      <div class="p-4 flex">
+        <h3 class="text-xl">Edit Pengurus</h3>
+      </div>
+      <div className="px-3 py-4 flex justify-between">
+        <div className="">
+          <Link
+            className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+            to="/himatikadmin/pengurus"
+          >
+            Kembali
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

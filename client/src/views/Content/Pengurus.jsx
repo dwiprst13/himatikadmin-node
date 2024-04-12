@@ -32,35 +32,39 @@ function Pengurus() {
     window.location.href = `/himatikadmin/pengurus/editpengurus/${id}`;
   };
 
-  const handleDelete = async (id) => {
-    const isConfirmed = window.confirm(
-      "Apakah kamu yakin ingin menghapus data pengurus ini?"
+const handleDelete = async (id) => {
+  if (!window.confirm("Apakah Anda yakin ingin menghapus pengurus ini?")) {
+    return;
+  }
+
+  try {
+    const response = await axios.delete(
+      `http://localhost:8081/pengurus/deletepengurus/${id}`
     );
-    if (isConfirmed) {
-      try {
-        const response = await axios.delete(`/delete/${id}`);
-        if (response.status === 200 || response.status === 204) {
-          console.log("Pengurus berhasil dihapus!");
-          setData(data.filter((pengurus) => pengurus.id_pengurus !== id));
-        } else {
-          throw new Error("Gagal menghapus pengurus");
-        }
-      } catch (error) {
-        console.error("Error saat menghapus pengurus:", error);
-      }
+    if (response.status === 200) {
+      console.log("Pengurus deleted successfully!");
+      setData(data.filter((pengurus) => pengurus.id_pengurus !== id));
+    } else {
+      throw new Error("Failed to delete pengurus");
     }
-  };
+  } catch (error) {
+    console.error("Error deleting pengurus:", error);
+    alert("Penghapusan gagal! Silakan coba lagi."); 
+  }
+};
+
+
 
   return (
     <div className="vh-100 vw-100 text-gray-900 bg-gray-200 min-h-screen">
       <div class="p-4 flex">
         <h3 class="text-xl">Daftar Pengurus</h3>
       </div>
-      <div className="px-3 py-4 flex justify-between bg-green-500">
+      <div className="px-3 py-4 flex justify-between">
         <div className="">
           <Link
             className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-            to=""
+            to="/himatikadmin/pengurus/tambahpengurus"
           >
             Tambah
           </Link>
