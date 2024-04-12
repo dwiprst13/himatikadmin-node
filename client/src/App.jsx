@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from './views/HomePage'
 import LoginPage from './views/LoginPage';
 import RegisterPage from './views/RegisterPage';
-import PageTemplates from './views/templates/PageTemplates';
 
 function App() {
   const [count, setCount] = useState(0)
