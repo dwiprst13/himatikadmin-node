@@ -1,9 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function Artikel() {
+  const [data, setData] = useState([]);
+  const [isDataFetched, setIsDataFetched] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8081/artikel");
+        if (response.status === 200) {
+          setData(response.data);
+        } else {
+          throw new Error("Failed to fetch artikel data");
+        }
+      } catch (error) {
+        console.error("Error fetching artikel data:", error);
+      } finally {
+        setIsDataFetched(true);
+      }
+    };
+
+    if (!isDataFetched) {
+      fetchData();
+    }
+  }, []);
+  const handleEdit = (id) => {
+    console.log("Edit data with id:", id);
+    window.location.href = `/himatikadmin/artikel/editartikel/${id}`;
+  };
+
   return (
-    <div className="vh-100 vw-100 text-gray-900 bg-gray-200 min-h-screen">
+    <div className="vh-100 text-gray-900 bg-gray-200 min-h-screen">
       <div className="h-20 p-4 flex w-full justify-between">
         <div>
           <h3 className="text-xl">Daftar Artikel</h3>
@@ -48,6 +77,42 @@ function Artikel() {
           Tambah
         </Link>
       </div>
+      <table className="w-full text-md table-auto bg-white shadow-md rounded mb-4">
+        <thead>
+          <tr>
+            <th className="text-center p-3 px-5">ID</th>
+            <th className="text-center p-3 px-5">Judul</th>
+            <th className="text-center p-3 px-5">Penulis</th>
+            <th className="text-center p-3 px-5">Tanggal</th>
+            <th className="text-center p-3 px-5">Status</th>
+            <th className="text-center p-3 px-5">Tag</th>
+            <th className="text-center p-3 px-5">Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((artikel) => (
+            <tr key={artikel.id_artikel} className="px-3 border-b bg-gray-100">
+              <td className="py-2 text-center px-2">{artikel.id_artikel}</td>
+              <td className="py-2 text-center px-2">{artikel.judul}</td>
+              <td className="py-2 text-center px-2">{artikel.author}</td>
+              <td className="py-2 text-center px-2">{artikel.date}</td>
+              <td className="py-2 text-center px-2">{artikel.status}</td>
+              <td className="py-2 text-center px-2">{artikel.tag}</td>
+              <td className="justify-center py-2 text-center px-2 flex gap-1">
+                <div className="">
+                  <button
+                    type="button"
+                    className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    onClick={() => handleEdit(artikel.id_artikel)}
+                  >
+                    Edit
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

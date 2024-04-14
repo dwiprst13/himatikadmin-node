@@ -3,6 +3,8 @@ GET http://localhost:8081/pengurus
 ###
 GET http://localhost:8081/admin
 ###
+GET http://localhost:8081/artikel
+###
 GET http://localhost:8081/admin/getadmin/1
 ###
 PUT  http://localhost:8081/admin/updateadmin/7
@@ -46,6 +48,17 @@ Content-Type: application/json
 {
     "name": "Dwi",
     "nim": "223200230",
+    "email": "Diklat@afdh",
+    "role": "Admin",
+    "password": "asfdsdfgaa"
+}
+###
+POST  http://localhost:8081/artikel/tambahartikel
+Content-Type: application/json
+
+{
+    "judul": "Dwi",
+    "content": "223200230",
     "email": "Diklat@afdh",
     "role": "Admin",
     "password": "asfdsdfgaa"
