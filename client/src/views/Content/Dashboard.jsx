@@ -1,6 +1,7 @@
 import React from 'react'
 
 function Dashboard() {
+    
   return (
     <div>
     <div className="grid grid-cols-12 gap-5 w-[90%]  mx-auto py-8 text-white">

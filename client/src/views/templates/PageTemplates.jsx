@@ -12,13 +12,14 @@ import Proker from "../Content/Proker";
 import Pesan from "../Content/Pesan";
 import Info from "../Content/Info";
 import TambahArtikel from "../Content/Tambah/TambahArtikel";
-import EditArtikel from "../Content/Edit/EditArtikel";
+// import EditArtikel from "../Content/Edit/EditArtikel";
 import TambahAdmin from "../Content/Tambah/TambahAdmin";
 import TambahGaleri from "../Content/Tambah/TambahGaleri";
 import TambahInfo from "../Content/Tambah/TambahInfo";
 import TambahProker from "../Content/Tambah/TambahProker";
 import TambahPengurus from "../Content/Tambah/TambahPengurus";
 import EditPengurus from "../Content/Edit/EditPengurus";
+import EditAdmin from "../Content/Edit/EditAdmin";
 
 function PageTemplates() {
   return (
@@ -38,7 +39,7 @@ function PageTemplates() {
             {/* Halaman Admin */}
             <Route path="/admin" element={<Admin />} />
             <Route path="/admin/tambahadmin" element={<TambahAdmin />} />
-            <Route path="/admin/editadmin" element={<EditArtikel />} />
+            <Route path="/admin/editadmin/:id" element={<EditAdmin />} />
             {/* Halaman Pengurus */}
             <Route path="/pengurus" element={<Pengurus />} />
             <Route
@@ -48,23 +49,23 @@ function PageTemplates() {
             <Route path="/pengurus/editpengurus/:id" element={<EditPengurus />} />
             {/* Halaman Divisi */}
             <Route path="/divisi" element={<Divisi />} />
-            <Route path="/divisi/editdivisi" element={<EditArtikel />} />
+            {/* <Route path="/divisi/editdivisi" element={<EditArtikel />} /> */}
             {/* Halaman Proker */}
             <Route path="/proker" element={<Proker />} />
             <Route path="/proker/tambahproker" element={<TambahProker />} />
-            <Route path="/proker/editproker" element={<EditArtikel />} />
+            {/* <Route path="/proker/editproker" element={<EditArtikel />} /> */}
             {/* Halaman Galeri */}
             <Route path="/galeri" element={<Galeri />} />
             <Route path="/galeri/tambahgaleri" element={<TambahGaleri />} />
-            <Route path="/galeri/editgaleri" element={<EditArtikel />} />
+            {/* <Route path="/galeri/editgaleri" element={<EditArtikel />} /> */}
             {/* Halaman Artikel */}
             <Route path="/artikel" element={<Artikel />} />
             <Route path="/artikel/tambahartikel" element={<TambahArtikel />} />
-            <Route path="/artikel/editartikel" element={<EditArtikel />} />
+            {/* <Route path="/artikel/editartikel" element={<EditArtikel />} /> */}
             {/* Halaman Info */}
             <Route path="/info" element={<Info />} />
             <Route path="/info/tambahinfo" element={<TambahInfo />} />
-            <Route path="/info/editinfo" element={<EditArtikel />} />
+            {/* <Route path="/info/editinfo" element={<EditArtikel />} /> */}
             {/* Halaman Pesan */}
             <Route path="/pesan" element={<Pesan />} />
             <Route path="/pesan" element={<Pesan />} />

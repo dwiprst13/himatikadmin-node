@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const pengurusRoutes = require("./src/routes/PengurusRoutes");
+const adminRoutes = require("./src/routes/AdminRoutes");
 const app = express();
 
 app.use(express.static(path.join(__dirname, "public")));
@@ -13,6 +14,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/pengurus", pengurusRoutes);
+app.use("/admin", adminRoutes);
 
 const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function Pengurus() {
   const [data, setData] = useState([]);
-  const [isDataFetched, setIsDataFetched] = useState(false); 
+  const [isDataFetched, setIsDataFetched] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,58 +18,48 @@ function Pengurus() {
       } catch (error) {
         console.error("Error fetching pengurus data:", error);
       } finally {
-        setIsDataFetched(true); 
+        setIsDataFetched(true);
       }
     };
 
     if (!isDataFetched) {
       fetchData();
     }
-  }, []); 
+  }, []);
 
   const handleEdit = (id) => {
     console.log("Edit data with id:", id);
     window.location.href = `/himatikadmin/pengurus/editpengurus/${id}`;
   };
 
-const handleDelete = async (id) => {
-  if (!window.confirm("Apakah Anda yakin ingin menghapus pengurus ini?")) {
-    return;
-  }
-
-  try {
-    const response = await axios.delete(
-      `http://localhost:8081/pengurus/deletepengurus/${id}`
-    );
-    if (response.status === 200) {
-      console.log("Pengurus deleted successfully!");
-      setData(data.filter((pengurus) => pengurus.id_pengurus !== id));
-    } else {
-      throw new Error("Failed to delete pengurus");
+  const handleDelete = async (id) => {
+    if (!window.confirm("Apakah Anda yakin ingin menghapus pengurus ini?")) {
+      return;
     }
-  } catch (error) {
-    console.error("Error deleting pengurus:", error);
-    alert("Penghapusan gagal! Silakan coba lagi."); 
-  }
-};
 
-
+    try {
+      const response = await axios.delete(
+        `http://localhost:8081/pengurus/deletepengurus/${id}`
+      );
+      if (response.status === 200) {
+        console.log("Pengurus deleted successfully!");
+        setData(data.filter((pengurus) => pengurus.id_pengurus !== id));
+      } else {
+        throw new Error("Failed to delete pengurus");
+      }
+    } catch (error) {
+      console.error("Error deleting pengurus:", error);
+      alert("Penghapusan gagal! Silakan coba lagi.");
+    }
+  };
 
   return (
     <div className="vh-100 vw-100 text-gray-900 bg-gray-200 min-h-screen">
-      <div className="p-4 flex">
-        <h3 className="text-xl">Daftar Pengurus</h3>
-      </div>
-      <div className="px-3 py-4 flex justify-between ">
-        <div className="">
-          <Link
-            className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-            to="/himatikadmin/pengurus/tambahpengurus"
-          >
-            Tambah
-          </Link>
+      <div className="h-20 p-4 flex w-full justify-between">
+        <div>
+          <h3 className="text-xl">Daftar Pengurus</h3>
         </div>
-        <div className="">
+        <div>
           <form method="post" className="flex mb-4 flex w-full flex-wrap ">
             <input
               type="search"
@@ -100,6 +90,14 @@ const handleDelete = async (id) => {
             </button>
           </form>
         </div>
+      </div>
+      <div className="px-3 py-4 flex justify-between ">
+        <Link
+          className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+          to="/himatikadmin/pengurus/tambahpengurus"
+        >
+          Tambah
+        </Link>
       </div>
       <div className="px-3 py-4 flex justify-center">
         <table className="w-full text-md table-auto bg-white shadow-md rounded mb-4">
@@ -158,21 +156,23 @@ const handleDelete = async (id) => {
                     <span className="text-red-500">x</span>
                   )}
                 </td>
-                <td className="py-2 text-center px-2 flex gap-1">
-                  <button
-                    type="button"
-                    className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-                    onClick={() => handleEdit(pengurus.id_pengurus)}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    type="button"
-                    className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-                    onClick={() => handleDelete(pengurus.id_pengurus)}
-                  >
-                    Delete
-                  </button>
+                <td className="justify-center py-2 text-center px-2 flex gap-1">
+                  <div className="">
+                    <button
+                      type="button"
+                      className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                      onClick={() => handleEdit(pengurus.id_pengurus)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                      onClick={() => handleDelete(pengurus.id_pengurus)}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
