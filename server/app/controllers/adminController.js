@@ -1,4 +1,4 @@
-const connection = require("../../database");
+const connection = require("../utils/database");
 const bcrypt = require("bcrypt");
 
 exports.getAllAdmin = (req, res) => {

@@ -1,4 +1,4 @@
-const connection = require("../../database");
+const connection = require("../utils/database");
 const multer = require("multer");
 const path = require("path");
 

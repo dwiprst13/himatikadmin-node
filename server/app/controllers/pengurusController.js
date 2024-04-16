@@ -1,4 +1,4 @@
-const connection = require("../../database");
+const connection = require("../utils/database");
 const multer = require("multer");
 const upload = multer({ dest: "../../uploads/fotopengurus/" });
 const path = require("path");
