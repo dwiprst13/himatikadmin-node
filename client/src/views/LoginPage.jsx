@@ -1,37 +1,31 @@
-// src/Components/Login.js
+
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import axios from "axios"; // make sure to install axios if not already
 
-const Login = () => {
-  const [credentials, setCredentials] = useState({
-    username: "",
-    password: "",
-  });
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+function Login() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCredentials((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault(); 
+  const handleLogin = async (event) => {
+    event.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:8081/auth/login",
-        credentials
-      );
-      if (response.data) {
-        console.log("Logged in successfully:", response.data);
-        navigate("/himatikadmin/home");
+      const response = await fetch("http://localhost:8081/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        localStorage.setItem("token", data.token);
+        alert("Login successful!");
+        window.location.href = "/himatikadmin";
+      } else {
+        alert(data.message); 
       }
-    } catch (err) {
-      setError(err.response ? err.response.data.message : err.message);
+    } catch (error) {
+      alert("Login failed:", error.message);
     }
   };
   return (
@@ -46,15 +40,19 @@ const Login = () => {
         <div className="text-center my-5">
           <h2 className="text-[1.5rem]">Silakan masuk dengan akun anda</h2>
         </div>
-        <form action="" onSubmit={handleSubmit}>
+        <form action="" onSubmit={handleLogin}>
           <input
             className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded"
             type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             placeholder="Nama Pengguna"
           />
           <input
             className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
             type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
           <div className="mt-4 flex justify-between font-semibold text-sm">

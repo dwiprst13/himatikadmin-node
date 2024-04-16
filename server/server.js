@@ -1,9 +1,10 @@
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
-const pengurusRoutes = require("./app/routes/PengurusRoutes");
+const pengurusRoutes = require("./app/routes/pengurusRoutes");
+const authRoutes = require("./app/routes/authRoutes");
 const adminRoutes = require("./app/routes/AdminRoutes");
-const artikelRoutes = require("./app/routes/ArtikelRoutes");
+const artikelRoutes = require("./app/routes/artikelRoutes");
 const app = express();
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
 });
 
 app.use(cookieParser());
+app.use("/auth", authRoutes);
 app.use("/pengurus", pengurusRoutes);
 app.use("/admin", adminRoutes);
 app.use("/artikel", artikelRoutes);

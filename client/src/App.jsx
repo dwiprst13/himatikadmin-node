@@ -3,7 +3,6 @@ import './App.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from './views/HomePage'
 import LoginPage from './views/LoginPage';
-import RegisterPage from './views/RegisterPage';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -14,7 +13,6 @@ function App() {
         <Routes>
           <Route path="/himatikadmin/*" element={<HomePage />} />
           <Route path="/himatikadmin/login" element={<LoginPage />} />
-          <Route path="/himatikadmin/register" element={<RegisterPage />} />
         </Routes>
       </Router>
     </>

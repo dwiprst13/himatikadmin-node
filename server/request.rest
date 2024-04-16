@@ -1,4 +1,11 @@
+POST http://localhost:8081/auth/login
+Content-Type: application/json
 
+{
+    "username": "dwiprast13",
+    "password": "122001"
+}
+###
 GET http://localhost:8081/pengurus
 ###
 GET http://localhost:8081/admin
