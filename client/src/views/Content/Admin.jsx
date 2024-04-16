@@ -72,6 +72,7 @@ function Admin() {
             <tr>
               <th className="text-center p-3 px-5">ID</th>
               <th className="text-center p-3 px-5">Nama</th>
+              <th className="text-center p-3 px-5">Nama Pengguna</th>
               <th className="text-center p-3 px-5">NIM</th>
               <th className="text-center p-3 px-5">Email</th>
               <th className="text-center p-3 px-5">Role</th>
@@ -83,6 +84,7 @@ function Admin() {
               <tr key={admin.id_admin} className="px-3 border-b bg-gray-100">
                 <td className="py-2 text-center px-2">{admin.id_admin}</td>
                 <td className="py-2 text-center px-2">{admin.nama}</td>
+                <td className="py-2 text-center px-2">{admin.username}</td>
                 <td className="py-2 text-center px-2">{admin.nim}</td>
                 <td className="py-2 text-center px-2">{admin.email}</td>
                 <td className="py-2 text-center px-2">{admin.role}</td>

@@ -1,17 +1,20 @@
-import { useState } from 'react'
-import './App.css'
+// src/App.jsx
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from './views/HomePage'
+import HomePage from './views/HomePage';
 import LoginPage from './views/LoginPage';
+import ProtectedRoute from './utils/ProtectedRoute'; 
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <Router>
         <Routes>
-          <Route path="/himatikadmin/*" element={<HomePage />} />
+          <Route path="/himatikadmin/*" element={
+            <ProtectedRoute>
+              <HomePage />
+            </ProtectedRoute>
+          } />
           <Route path="/himatikadmin/login" element={<LoginPage />} />
         </Routes>
       </Router>
@@ -19,4 +22,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

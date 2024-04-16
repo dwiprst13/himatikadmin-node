@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { MdSpaceDashboard } from "react-icons/md";
 import { RiAdminLine } from "react-icons/ri";
@@ -11,11 +11,23 @@ import { RiInformationFill } from "react-icons/ri";
 import { MdMessage } from "react-icons/md";
 
 function SideBar() {
-  const getNavLinkClass = ({ isActive }) => {
-    return isActive
+  const [userRole, setUserRole] = useState("");
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      setUserRole(payload.role);
+    }
+  }, []);
+
+  const getNavLinkClass = ({ isActive }) =>
+    isActive
       ? "flex items-center py-2 px-4 text-gray-300 rounded-md bg-blue-500 hover:bg-blue-500"
       : "flex items-center py-2 px-4 text-gray-300 rounded-md hover:bg-gray-950 hover:text-gray-100";
-  };
+
+  const canAccess = (roles) => roles.includes(userRole);
+
   return (
     <section>
       <div className="h-screen bg-gray-900 p-4 z-50 transition-transform">
@@ -34,78 +46,95 @@ function SideBar() {
             </span>
           </a>
           <ul className="mt-4 space-y-2">
-            <li className="mb-1">
-              <NavLink to="/himatikadmin/home" className={getNavLinkClass}>
-                <i className="ri-home-2-line mr-3 text-lg">
-                  <MdSpaceDashboard />
-                </i>
-                <span className="text-sm">Dashboard</span>
-              </NavLink>
-            </li>
-            <li className="mb-1 group ">
-              <NavLink to="/himatikadmin/admin" className={getNavLinkClass}>
-                <i className="ri-home-2-line mr-3 text-lg">
-                  <RiAdminLine />
-                </i>
-                <span className="text-sm">Admin</span>
-              </NavLink>
-            </li>
-            <li className="mb-1 group">
-              <NavLink to="/himatikadmin/pengurus" className={getNavLinkClass}>
-                <i className="ri-settings-2-line mr-3 text-lg">
-                  <FiUsers />
-                </i>
-                <span className="text-sm">Pengurus</span>
-              </NavLink>
-            </li>
-            <li className="mb-1 group ">
-              <NavLink to="/himatikadmin/divisi" className={getNavLinkClass}>
-                <i className="ri-home-2-line mr-3 text-lg">
-                  <FaUsers />
-                </i>
-                <span className="text-sm">Divisi</span>
-              </NavLink>
-            </li>
-            <li className="mb-1 group">
-              <NavLink to="/himatikadmin/proker" className={getNavLinkClass}>
-                <i className="ri-settings-2-line mr-3 text-lg">
-                  <GoTasklist />
-                </i>
-                <span className="text-sm">Proker</span>
-              </NavLink>
-            </li>
-            <li className="mb-1 group ">
-              <NavLink to="/himatikadmin/artikel" className={getNavLinkClass}>
-                <i className="ri-home-2-line mr-3 text-lg">
-                  <RiArticleFill />
-                </i>
-                <span className="text-sm">Artikel</span>
-              </NavLink>
-            </li>
-            <li className="mb-1 group ">
-              <NavLink to="/himatikadmin/galeri" className={getNavLinkClass}>
-                <i className="ri-home-2-line mr-3 text-lg">
-                  <RiGalleryFill />
-                </i>
-                <span className="text-sm">Galeri</span>
-              </NavLink>
-            </li>
-            <li className="mb-1 group ">
-              <NavLink to="/himatikadmin/info" className={getNavLinkClass}>
-                <i className="ri-home-2-line mr-3 text-lg">
-                  <RiInformationFill />
-                </i>
-                <span className="text-sm">Info</span>
-              </NavLink>
-            </li>
-            <li className="mb-1 group">
-              <NavLink to="/himatikadmin/pesan" className={getNavLinkClass}>
-                <i className="ri-settings-2-line mr-3 text-lg">
-                  <MdMessage />
-                </i>
-                <span className="text-sm">Pesan</span>
-              </NavLink>
-            </li>
+            {canAccess(["superAdmin", "Admin", "Jurnalis"]) && (
+              <li className="mb-1">
+                <NavLink to="/himatikadmin/home" className={getNavLinkClass}>
+                  <MdSpaceDashboard className="mr-3 text-lg" />
+                  <span>Dashboard</span>
+                </NavLink>
+              </li>
+            )}
+            {canAccess(["superAdmin"]) && (
+              <li className="mb-1">
+                <NavLink to="/himatikadmin/admin" className={getNavLinkClass}>
+                  <RiAdminLine className="mr-3 text-lg" />
+                  <span>Admin</span>
+                </NavLink>
+              </li>
+            )}
+            {canAccess(["superAdmin", "Admin"]) && (
+              <li className="mb-1 group">
+                <NavLink
+                  to="/himatikadmin/pengurus"
+                  className={getNavLinkClass}
+                >
+                  <i className="ri-settings-2-line mr-3 text-lg">
+                    <FiUsers />
+                  </i>
+                  <span className="text-sm">Pengurus</span>
+                </NavLink>
+              </li>
+            )}
+            {canAccess(["superAdmin", "Admin"]) && (
+              <li className="mb-1 group ">
+                <NavLink to="/himatikadmin/divisi" className={getNavLinkClass}>
+                  <i className="ri-home-2-line mr-3 text-lg">
+                    <FaUsers />
+                  </i>
+                  <span className="text-sm">Divisi</span>
+                </NavLink>
+              </li>
+            )}
+            {canAccess(["superAdmin", "Admin"]) && (
+              <li className="mb-1 group">
+                <NavLink to="/himatikadmin/proker" className={getNavLinkClass}>
+                  <i className="ri-settings-2-line mr-3 text-lg">
+                    <GoTasklist />
+                  </i>
+                  <span className="text-sm">Proker</span>
+                </NavLink>
+              </li>
+            )}
+            {canAccess(["superAdmin", "Admin", "Jurnalis"]) && (
+              <li className="mb-1 group ">
+                <NavLink to="/himatikadmin/artikel" className={getNavLinkClass}>
+                  <i className="ri-home-2-line mr-3 text-lg">
+                    <RiArticleFill />
+                  </i>
+                  <span className="text-sm">Artikel</span>
+                </NavLink>
+              </li>
+            )}
+            {canAccess(["superAdmin", "Admin", "Jurnalis"]) && (
+              <li className="mb-1 group ">
+                <NavLink to="/himatikadmin/galeri" className={getNavLinkClass}>
+                  <i className="ri-home-2-line mr-3 text-lg">
+                    <RiGalleryFill />
+                  </i>
+                  <span className="text-sm">Galeri</span>
+                </NavLink>
+              </li>
+            )}
+            {canAccess(["superAdmin", "Admin", "Jurnalis"]) && (
+              <li className="mb-1 group ">
+                <NavLink to="/himatikadmin/info" className={getNavLinkClass}>
+                  <i className="ri-home-2-line mr-3 text-lg">
+                    <RiInformationFill />
+                  </i>
+                  <span className="text-sm">Info</span>
+                </NavLink>
+              </li>
+            )}
+            {canAccess(["superAdmin", "Admin"]) && (
+              <li className="mb-1 group">
+                <NavLink to="/himatikadmin/pesan" className={getNavLinkClass}>
+                  <i className="ri-settings-2-line mr-3 text-lg">
+                    <MdMessage />
+                  </i>
+                  <span className="text-sm">Pesan</span>
+                </NavLink>
+              </li>
+            )}
           </ul>
         </div>
         <div className="">
@@ -119,3 +148,4 @@ function SideBar() {
 }
 
 export default SideBar;
+

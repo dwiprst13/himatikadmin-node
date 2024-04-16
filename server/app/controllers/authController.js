@@ -32,11 +32,17 @@ exports.login = async (req, res) => {
       }
 
       const token = jwt.sign(
-        { id: user.id_admin, username: user.username },
-        "secret_key"
+        { id: user.id_admin, username: user.username, nama: user.nama, nim: user.nim, role: user.role },
+        "secret_key",
+        { expiresIn: "1h" }
       );
 
       res.json({ message: "Login berhasil", token });
     }
   );
+};
+
+exports.logout = () => {
+  localStorage.removeItem("token"); 
+  window.location.href = "/himatikadmin/login"; 
 };
