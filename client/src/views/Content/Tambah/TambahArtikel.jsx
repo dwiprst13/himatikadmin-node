@@ -47,7 +47,7 @@ function TambahArtikel() {
         }
       );
       alert("Artikel berhasil ditambahkan!");
-      console.log(response.data);
+      window.location.href = "/himatikadmin/artikel";
     } catch (error) {
       console.error("Gagal mengupload artikel:", error);
       alert("Gagal menambahkan artikel!");
@@ -134,11 +134,6 @@ function TambahArtikel() {
                       className="h-96 w-full object-cover"
                       style={{ display: imagePreview ? "block" : "none" }}
                     />
-                    {!imagePreview && (
-                      <span className="text-white text-center">
-                        Pilih Gambar Header Artikel
-                      </span>
-                    )}
                   </div>
                 </div>
               </div>

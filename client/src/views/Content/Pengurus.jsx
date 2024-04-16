@@ -27,6 +27,10 @@ function Pengurus() {
     }
   }, []);
 
+  const handleDetail = (id) => {
+    window.location.href = `/himatikadmin/pengurus/detailpengurus/${id}`;
+  };
+
   const handleEdit = (id) => {
     console.log("Edit data with id:", id);
     window.location.href = `/himatikadmin/pengurus/editpengurus/${id}`;
@@ -60,7 +64,7 @@ function Pengurus() {
           <h3 className="text-xl">Daftar Pengurus</h3>
         </div>
         <div>
-          <form method="post" className="flex mb-4 flex w-full flex-wrap ">
+          <form method="post" className="flex mb-4 w-full flex-wrap ">
             <input
               type="search"
               className="mx-auto m-0 -mr-0.5 block min-w-0 flex-auto rounded-l border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6]  outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-blackfocus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-gray-600 dark:focus:border-primary"
@@ -160,17 +164,10 @@ function Pengurus() {
                   <div className="">
                     <button
                       type="button"
-                      className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-                      onClick={() => handleEdit(pengurus.id_pengurus)}
+                      className="mr-3 text-sm bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                      onClick={() => handleDetail(pengurus.id_pengurus)}
                     >
-                      Edit
-                    </button>
-                    <button
-                      type="button"
-                      className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-                      onClick={() => handleDelete(pengurus.id_pengurus)}
-                    >
-                      Delete
+                      Detail
                     </button>
                   </div>
                 </td>

@@ -1,11 +1,23 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 function Galeri() {
   return (
-    <div>
-      <a href="/himatikadmin/galeri/tambahgaleri">Tambah</a>
-      <a href="/himatikadmin/galeri/editgaleri">Edit</a>
-      <h2>Page Galeri</h2>
+    <div className="vh-100 vw-100 text-gray-900 bg-gray-200 min-h-screen">
+      <div className="h-20 p-4 flex">
+        <h3 className="text-xl">Daftar Galeri</h3>
+      </div>
+      <div className="px-3 py-4 flex justify-between ">
+        <Link
+          className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+          to="/himatikadmin/galeri/tambahgaleri"
+        >
+          Tambah
+        </Link>
+      </div>
+      <div className="px-3 py-4 flex justify-center">
+        
+      </div>
     </div>
   );
 }

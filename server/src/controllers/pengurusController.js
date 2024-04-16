@@ -1,6 +1,7 @@
 const connection = require("../../database");
 const multer = require("multer");
 const upload = multer({ dest: "../../uploads/fotopengurus/" });
+const path = require("path");
 
 exports.getAllPengurus = (req, res) => {
   const sql = "SELECT * FROM pengurus";
@@ -20,6 +21,9 @@ exports.getPengurusById = (req, res) => {
 };
 
 exports.tambahPengurus = (req, res) => {
+    console.log(req.body);
+    console.log(req.file);
+
   const {
     nama,
     nama_panggilan,
@@ -31,11 +35,7 @@ exports.tambahPengurus = (req, res) => {
     github_link,
   } = req.body;
 
-  const foto = req.file ? req.file.path : null; // Asumsi foto diunggah dan tersimpan di 'uploads/'
-
-  if (!nama || !nim || !divisi || !posisi) {
-    return res.status(400).json({ message: "Semua field harus diisi." });
-  }
+  const imagepath = req.file.path;
 
   const sql =
     "INSERT INTO pengurus (nama, nama_panggilan, nim, divisi, posisi, foto, ig_link, linkedin_link, github_link) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -48,7 +48,7 @@ exports.tambahPengurus = (req, res) => {
       nim,
       divisi,
       posisi,
-      foto,
+      imagepath,
       ig_link,
       linkedin_link,
       github_link,

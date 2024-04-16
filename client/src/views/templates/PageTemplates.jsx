@@ -20,6 +20,8 @@ import TambahProker from "../Content/Tambah/TambahProker";
 import TambahPengurus from "../Content/Tambah/TambahPengurus";
 import EditPengurus from "../Content/Edit/EditPengurus";
 import EditAdmin from "../Content/Edit/EditAdmin";
+import DetailPengurus from "../Content/Detail/DetailPengurus";
+import DetailArtikel from "../Content/Detail/ArtikelDetail";
 
 function PageTemplates() {
   return (
@@ -47,6 +49,7 @@ function PageTemplates() {
               element={<TambahPengurus />}
             />
             <Route path="/pengurus/editpengurus/:id" element={<EditPengurus />} />
+            <Route path="/pengurus/detailpengurus/:id" element={<DetailPengurus />} />
             {/* Halaman Divisi */}
             <Route path="/divisi" element={<Divisi />} />
             {/* <Route path="/divisi/editdivisi" element={<EditArtikel />} /> */}
@@ -61,6 +64,7 @@ function PageTemplates() {
             {/* Halaman Artikel */}
             <Route path="/artikel" element={<Artikel />} />
             <Route path="/artikel/tambahartikel" element={<TambahArtikel />} />
+            <Route path="/artikel/detailartikel/:id" element={<DetailArtikel />} />
             {/* <Route path="/artikel/editartikel" element={<EditArtikel />} /> */}
             {/* Halaman Info */}
             <Route path="/info" element={<Info />} />

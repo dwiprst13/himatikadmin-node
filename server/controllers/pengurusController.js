@@ -1,5 +1,5 @@
 // pengurusController.js
-const pengurusModel = require("../src/models/pengurusModel");
+const pengurusModel = require("../src/middleware/authMiddleware");
 
 const getPengurus = async (req, res) => {
   pengurusModel.getPengurus((err, data) => {

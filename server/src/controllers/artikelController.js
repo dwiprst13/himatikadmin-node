@@ -2,30 +2,13 @@ const connection = require("../../database");
 const multer = require("multer");
 const path = require("path");
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "public/uploads/artikel/");
-  },
-  filename: function (req, file, cb) {
-    cb(
-      null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-    );
-  },
-});
-
-const fileFilter = function (req, file, cb) {
-  if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
-    return cb(new Error("Hanya diperbolehkan untuk mengunggah gambar."));
-  }
-  cb(null, true);
+const getCurrentDate = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
 };
-
-const upload = multer({
-  storage: storage,
-  limits: { fileSize: 1024 * 1024 * 5 },
-  fileFilter: fileFilter,
-});
 
 exports.getAllArtikel = (req, res) => {
   const sql = "SELECT * FROM artikel";
@@ -41,12 +24,13 @@ exports.tambahArtikel = (req, res) => {
 
   const { judul, content, tag, status } = req.body;
   const imagepath = req.file.path;
+  const date = getCurrentDate();
 
   const sql =
-    "INSERT INTO artikel (judul, content, tag, status, img) VALUES (?, ?, ?, ?, ?)";
+    "INSERT INTO artikel (judul, content, tag, status, img, date) VALUES (?, ?, ?, ?, ?, ?)";
   connection.query(
     sql,
-    [judul, content, tag, status, imagepath],
+    [judul, content, tag, status, imagepath, date], 
     (error, results) => {
       if (error) {
         console.error("Error menyimpan artikel:", error);
@@ -58,5 +42,3 @@ exports.tambahArtikel = (req, res) => {
     }
   );
 };
-
-

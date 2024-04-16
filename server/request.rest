@@ -20,6 +20,8 @@ Content-Type: application/json
 
 GET http://localhost:8081/pengurus/editpengurus/1
 ###
+GET http://localhost:8081/pengurus/detailpengurus/3
+###
 
 DELETE  http://localhost:8081/pengurus/deletepengurus/9
 ###
@@ -59,8 +61,7 @@ Content-Type: application/json
 {
     "judul": "Dwi",
     "content": "223200230",
-    "email": "Diklat@afdh",
-    "role": "Admin",
-    "password": "asfdsdfgaa"
+    "tag": "Published",
+    "status": "Published"
 }
 ###

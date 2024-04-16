@@ -49,17 +49,28 @@ function EditAdmin() {
     }
 
     try {
-      const response = await fetch(`http://localhost:8081/admin/updateadmin/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedData),
-      });
-
+      const response = await fetch(
+        `http://localhost:8081/admin/updateadmin/${id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updatedData),
+        }
+      );
       const data = await response.json();
-      console.log("Update successful", data);
+      if (response.ok) {
+        console.log("Update successful", data);
+        alert(data.message);
+        window.location.href = "/himatikadmin/admin";
+      } else {
+        console.error("Update failed", data);
+        alert(data.message);
+      }
     } catch (error) {
       console.error("Error updating admin:", error);
+      alert("Network or server error"); 
     }
+
   };
 
   return (

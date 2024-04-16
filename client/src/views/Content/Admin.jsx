@@ -56,18 +56,15 @@ function Admin() {
   return (
     <div className="vh-100 vw-100 text-gray-900 bg-gray-200 min-h-screen">
       <div className="h-20 p-4 flex">
-        <h3 className="text-xl">Daftar admin</h3>
+        <h3 className="text-xl">Daftar Admin</h3>
       </div>
       <div className="px-3 py-4 flex justify-between ">
-        <div className="">
           <Link
             className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
             to="/himatikadmin/admin/tambahadmin"
           >
             Tambah
           </Link>
-        </div>
-        <div className=""></div>
       </div>
       <div className="px-3 py-4 flex justify-center">
         <table className="w-full text-md table-auto bg-white shadow-md rounded mb-4">

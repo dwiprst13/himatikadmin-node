@@ -1,53 +1,59 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function TambahPengurus() {
-  const [values, setValues] = useState({
-    nama: "",
-    nama_panggilan: "",
-    nim: "",
-    divisi: "",
-    posisi: "",
-    foto: null, 
-    ig_link: "",
-    linkedin_link: "",
-    github_link: ""
-  });
+  const editorRef = useRef(null);
+  const fileInputRef = useRef(null);
+  const [imagePreview, setImagePreview] = useState("");
 
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImagePreview(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
     const formData = new FormData();
-    formData.append("nama", values.nama);
-    formData.append("nama_panggilan", values.nama_panggilan);
-    formData.append("nim", values.nim);
-    formData.append("divisi", values.divisi);
-    formData.append("posisi", values.posisi);
-    formData.append("foto", values.foto);
-    formData.append("ig_link", values.ig_link);
-    formData.append("linkedin_link", values.linkedin_link);
-    formData.append("github_link", values.github_link);
+    formData.append("nama", event.target.nama.value);
+    formData.append("nama_panggilan", event.target.nama_panggilan.value);
+    formData.append("nim", event.target.nim.value);
+    formData.append("divisi", event.target.divisi.value);
+    formData.append("posisi", event.target.posisi.value);
+    formData.append("foto", fileInputRef.current.files[0]);
+    formData.append("ig_link", event.target.ig_link.value);
+    formData.append("linkedin_link", event.target.linkedin_link.value);
+    formData.append("github_link", event.target.github_link.value);
 
-    
-    console.log(values);
-    axios
-      .post("http://localhost:8081/pengurus/tambahpengurus", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((res) => {
-        navigate("/");
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
-  }
+    try {
+      const response = await axios.post(
+        "http://localhost:8081/pengurus/tambahpengurus",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      alert("pengurus berhasil ditambahkan!");
+      window.location.href = "/himatikadmin/pengurus";
+    } catch (error) {
+      console.error("Gagal mengupload pengurus:", error);
+      alert("Gagal menambahkan pengurus!");
+    }
+  };
 
   function handleFileChange(e) {
-    setValues({ ...values, foto: e.target.files[0] }); 
+    setValues({ ...values, foto: e.target.files[0] });
   }
   return (
     <div className="vh-100 vw-100 text-gray-900 bg-gray-200 min-h-screen">
@@ -67,6 +73,7 @@ function TambahPengurus() {
       <div>
         <form
           className="space-y-6"
+          method="POST"
           onSubmit={handleSubmit}
           encType="multipart/form-data"
         >
@@ -83,10 +90,7 @@ function TambahPengurus() {
                   <input
                     type="text"
                     name="nama"
-                    required
-                    onChange={(e) =>
-                      setValues({ ...values, nama: e.target.value })
-                    }
+                    required 
                     className="block w-full rounded-md  p-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -103,9 +107,6 @@ function TambahPengurus() {
                     type="text"
                     name="nama_panggilan"
                     required
-                    onChange={(e) =>
-                      setValues({ ...values, nama_panggilan: e.target.value })
-                    }
                     className="block w-full rounded-md  p-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -123,10 +124,7 @@ function TambahPengurus() {
                     name="nim"
                     type="text"
                     autoComplete="off"
-                    required
-                    onChange={(e) =>
-                      setValues({ ...values, nim: e.target.value })
-                    }
+                    required 
                     className="block w-full rounded-md  p-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -141,10 +139,7 @@ function TambahPengurus() {
                 <select
                   id="divisi"
                   name="divisi"
-                  required
-                  onChange={(e) =>
-                    setValues({ ...values, divisi: e.target.value })
-                  }
+                  required 
                   className="block w-full rounded-md p-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mt-2"
                 >
                   <option value="Ketua">Ketua</option>
@@ -170,10 +165,7 @@ function TambahPengurus() {
                     name="posisi"
                     type="text"
                     autoComplete="off"
-                    required
-                    onChange={(e) =>
-                      setValues({ ...values, posisi: e.target.value })
-                    }
+                    required 
                     className="block w-full rounded-md  p-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -192,8 +184,12 @@ function TambahPengurus() {
                     id="fotopengurus"
                     name="fotopengurus"
                     type="file"
+                    autoComplete=""
+                    multiple
+                    onChange={handleImageChange}
+                    ref={fileInputRef}
+                    required
                     accept="image/*"
-                    onChange={handleFileChange}
                     className="bg-white block w-[100%] p-5 file:mr-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-500 file:text-white hover:file:bg-violet-500 file:cursor-pointer rounded-md border-0 py-1.5 white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:  focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -210,10 +206,7 @@ function TambahPengurus() {
                     id="ig_link"
                     name="ig_link"
                     type="text"
-                    autoComplete="off"
-                    onChange={(e) =>
-                      setValues({ ...values, ig_link: e.target.value })
-                    }
+                    autoComplete="off" 
                     className="block w-full rounded-md  p-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -230,10 +223,7 @@ function TambahPengurus() {
                     id="linkedin_link"
                     name="linkedin_link"
                     type="text"
-                    autoComplete="off"
-                    onChange={(e) =>
-                      setValues({ ...values, linkedin_link: e.target.value })
-                    }
+                    autoComplete="off" 
                     className="block w-full rounded-md  p-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -250,10 +240,7 @@ function TambahPengurus() {
                     id="github_link"
                     name="github_link"
                     type="text"
-                    autoComplete="off"
-                    onChange={(e) =>
-                      setValues({ ...values, github_link: e.target.value })
-                    }
+                    autoComplete="off" 
                     className="block w-full rounded-md  p-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
