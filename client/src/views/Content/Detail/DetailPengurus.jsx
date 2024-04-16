@@ -90,102 +90,104 @@ useEffect(() => {
           <div className="col-span-10">
             <div className="grid grid-cols-12">
               <table className="col-span-10">
-                <tr>
-                  <td className="w-48">
-                    <b>Nama</b>
-                  </td>
-                  <td className="w-6">:</td>
-                  <td>{pengurus.nama}</td>
-                </tr>
-                <tr>
-                  <td className="w-48">
-                    <b>Nama Panggilan</b>
-                  </td>
-                  <td>:</td>
-                  <td>{pengurus.nama_panggilan}</td>
-                </tr>
-                <tr>
-                  <td className="w-48">
-                    <b>Nim</b>
-                  </td>
-                  <td>:</td>
-                  <td>{pengurus.nim}</td>
-                </tr>
-                <tr>
-                  <td className="w-48">
-                    <b>Divisi</b>
-                  </td>
-                  <td>:</td>
-                  <td>{pengurus.divisi}</td>
-                </tr>
-                <tr>
-                  <td className="w-48">
-                    <b>Posisi</b>
-                  </td>
-                  <td>:</td>
-                  <td>{pengurus.posisi}</td>
-                </tr>
-                <tr>
-                  <td className="w-48">
-                    <b>Link Instagram</b>
-                  </td>
-                  <td>:</td>
-                  <td>
-                    {pengurus.ig_link ? (
-                      <a
-                        href={pengurus.ig_link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-700"
-                      >
-                        {pengurus.ig_link}
-                      </a>
-                    ) : (
-                      "-"
-                    )}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="w-48">
-                    <b>Link Github</b>
-                  </td>
-                  <td>:</td>
-                  <td>
-                    {pengurus.github_link ? (
-                      <a
-                        href={pengurus.github_link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-700"
-                      >
-                        {pengurus.github_link}
-                      </a>
-                    ) : (
-                      "-"
-                    )}
-                  </td>
-                </tr>
+                <tbody>
+                  <tr>
+                    <td className="w-48">
+                      <b>Nama</b>
+                    </td>
+                    <td className="w-6">:</td>
+                    <td>{pengurus.nama}</td>
+                  </tr>
+                  <tr>
+                    <td className="w-48">
+                      <b>Nama Panggilan</b>
+                    </td>
+                    <td>:</td>
+                    <td>{pengurus.nama_panggilan}</td>
+                  </tr>
+                  <tr>
+                    <td className="w-48">
+                      <b>Nim</b>
+                    </td>
+                    <td>:</td>
+                    <td>{pengurus.nim}</td>
+                  </tr>
+                  <tr>
+                    <td className="w-48">
+                      <b>Divisi</b>
+                    </td>
+                    <td>:</td>
+                    <td>{pengurus.divisi}</td>
+                  </tr>
+                  <tr>
+                    <td className="w-48">
+                      <b>Posisi</b>
+                    </td>
+                    <td>:</td>
+                    <td>{pengurus.posisi}</td>
+                  </tr>
+                  <tr>
+                    <td className="w-48">
+                      <b>Link Instagram</b>
+                    </td>
+                    <td>:</td>
+                    <td>
+                      {pengurus.ig_link ? (
+                        <a
+                          href={pengurus.ig_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-700"
+                        >
+                          {pengurus.ig_link}
+                        </a>
+                      ) : (
+                        "-"
+                      )}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="w-48">
+                      <b>Link Github</b>
+                    </td>
+                    <td>:</td>
+                    <td>
+                      {pengurus.github_link ? (
+                        <a
+                          href={pengurus.github_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-700"
+                        >
+                          {pengurus.github_link}
+                        </a>
+                      ) : (
+                        "-"
+                      )}
+                    </td>
+                  </tr>
 
-                <tr>
-                  <td className="w-48">
-                    <b>Link LinkedIn</b>
-                  </td>
-                  <td>:</td>
-                  <td>
-                    {pengurus.linkedin_link ? (
-                      <a
-                        href={pengurus.linkedin_link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-700"
-                      >
-                        {pengurus.linkedin_link}
-                      </a>
-                    ) : (
-                      "-"
-                    )}
-                  </td>
-                </tr>
+                  <tr>
+                    <td className="w-48">
+                      <b>Link LinkedIn</b>
+                    </td>
+                    <td>:</td>
+                    <td>
+                      {pengurus.linkedin_link ? (
+                        <a
+                          href={pengurus.linkedin_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-700"
+                        >
+                          {pengurus.linkedin_link}
+                        </a>
+                      ) : (
+                        "-"
+                      )}
+                    </td>
+                  </tr>
+                </tbody>
               </table>
               <div className="col-span-2">
                 <h3 className="text-center">

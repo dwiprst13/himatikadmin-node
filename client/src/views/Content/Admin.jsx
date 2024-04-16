@@ -59,12 +59,12 @@ function Admin() {
         <h3 className="text-xl">Daftar Admin</h3>
       </div>
       <div className="px-3 py-4 flex justify-between ">
-          <Link
-            className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-            to="/himatikadmin/admin/tambahadmin"
-          >
-            Tambah
-          </Link>
+        <Link
+          className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+          to="/himatikadmin/admin/tambahadmin"
+        >
+          Tambah
+        </Link>
       </div>
       <div className="px-3 py-4 flex justify-center">
         <table className="w-full text-md table-auto bg-white shadow-md rounded mb-4">
@@ -89,22 +89,24 @@ function Admin() {
                 <td className="py-2 text-center px-2">{admin.email}</td>
                 <td className="py-2 text-center px-2">{admin.role}</td>
                 <td className="py-2 text-center px-2 flex gap-1 justify-center">
-                  <div>
-                    <button
-                      type="button"
-                      className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-                      onClick={() => handleEdit(admin.id_admin)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      type="button"
-                      className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-                      onClick={() => handleDelete(admin.id_admin)}
-                    >
-                      Delete
-                    </button>
-                  </div>
+                  {admin.nim !== "223200230" && (
+                    <div>
+                      <button
+                        type="button"
+                        className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                        onClick={() => handleEdit(admin.id_admin)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        type="button"
+                        className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                        onClick={() => handleDelete(admin.id_admin)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  )}
                 </td>
               </tr>
             ))}
